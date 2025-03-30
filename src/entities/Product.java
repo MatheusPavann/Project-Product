@@ -1,24 +1,17 @@
 package entities;
 
 public class Product {
-    private int id;
+    private Long id;
     private String name;
     private String description;
     private Double price;
-    private int stockQuantity;
+    private Integer stockQuantity;
 
     public Product(){
 
     }
 
-    public Product(String name, String description, Double price, int stockQuantity) {
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.stockQuantity = stockQuantity;
-    }
-
-    public Product(int id, String name, String description, Double price, int stockQuantity) {
+    public Product(Long id, String name, String description, Double price, Integer stockQuantity) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -26,11 +19,18 @@ public class Product {
         this.stockQuantity = stockQuantity;
     }
 
-    public int getId() {
+    public Product(String name, String description, Double price, Integer stockQuantity) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -58,23 +58,22 @@ public class Product {
         this.price = price;
     }
 
-    public int getStockQuantity() {
+    public Integer getStockQuantity() {
         return stockQuantity;
     }
 
-    public void setStockQuantity(int stockQuantity) {
+    public void setStockQuantity(Integer stockQuantity) {
         this.stockQuantity = stockQuantity;
     }
 
-
     @Override
-    public String toString(){
-        return "Id: "+ getId() + "\n" +
-                "Nome: " + getName() + "\n" +
-                "Descricao: " + getDescription() + "\n" +
-                "Preco: " + getPrice() + "\n" +
-                "Quantidade: " + getStockQuantity() + "\n";
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", stockQuantity=" + stockQuantity +
+                '}';
     }
-
-
 }
