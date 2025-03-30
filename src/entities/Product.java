@@ -11,6 +11,13 @@ public class Product {
 
     }
 
+    public Product(String name, String description, Double price, int stockQuantity) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+    }
+
     public Product(int id, String name, String description, Double price, int stockQuantity) {
         this.id = id;
         this.name = name;
@@ -57,6 +64,16 @@ public class Product {
 
     public void setStockQuantity(int stockQuantity) {
         this.stockQuantity = stockQuantity;
+    }
+
+
+    @Override
+    public String toString(){
+        return "Id: "+ getId() + "\n" +
+                "Nome: " + getName() + "\n" +
+                "Descricao: " + getDescription() + "\n" +
+                "Preco: " + getPrice() + "\n" +
+                "Quantidade: " + getStockQuantity() + "\n";
     }
 
 
