@@ -1,5 +1,5 @@
 import InterfaceMet.ProductManager;
-import customExceptions.SelectionException;
+import exceptions.SelectionException;
 import entities.Product;
 import java.sql.Connection;
 import java.sql.SQLException;
