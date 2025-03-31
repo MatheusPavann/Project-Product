@@ -6,17 +6,19 @@ public class Product {
     private String description;
     private Double price;
     private Integer stockQuantity;
+    private Long code;
 
     public Product(){
 
     }
 
-    public Product(Long id, String name, String description, Double price, Integer stockQuantity) {
+    public Product(Long id, String name, String description, Double price, Integer stockQuantity, Long code) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.stockQuantity = stockQuantity;
+        this.code = code;
     }
 
     public Product(String name, String description, Double price, Integer stockQuantity) {
@@ -64,6 +66,14 @@ public class Product {
 
     public void setStockQuantity(Integer stockQuantity) {
         this.stockQuantity = stockQuantity;
+    }
+
+    public Long getCode() {
+        return code;
+    }
+
+    public void setCode(Long code) {
+        this.code = code;
     }
 
     @Override

@@ -30,12 +30,13 @@ public class GetAllProductsUseCaseImpl implements GetAllProductsUseCase {
                 String description = resultSet.getString("description");
                 Double price = resultSet.getDouble("price");
                 int stockQuantity = resultSet.getInt("stock_quantity");
+                long code = resultSet.getLong("code");
 
-                Product product = new Product(id, name, description, price, stockQuantity);
+                Product product = new Product(id, name, description, price, stockQuantity, code);
                 products.add(product);
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Erro ao conectar com o banco de dados");
         }
         return products;
     }
