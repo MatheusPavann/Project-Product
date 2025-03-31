@@ -24,7 +24,7 @@ public class RegisterProductUseCaseImpl implements RegisterProductUseCase {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.out.println("Erro ao conectar com o banco de dados");
         }
     }
 }
