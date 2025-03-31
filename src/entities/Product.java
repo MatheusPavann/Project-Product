@@ -21,11 +21,12 @@ public class Product {
         this.code = code;
     }
 
-    public Product(String name, String description, Double price, Integer stockQuantity) {
+    public Product(String name, String description, Double price, Integer stockQuantity, Long code) {
         this.name = name;
         this.description = description;
         this.price = price;
         this.stockQuantity = stockQuantity;
+        this.code = code;
     }
 
     public Long getId() {
