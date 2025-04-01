@@ -1,13 +1,16 @@
 package components;
 
 import entities.Product;
+import usecaseimpl.GetAllProductsUseCaseImpl;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class MainScreen extends JFrame {
     public MainScreen() {
         this.setLayout(new GridBagLayout());
-        this.setSize(800, 600);
+        this.setSize(1920, 1080);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Gerenciador de Produtos");
         this.setLocationRelativeTo(null);
@@ -17,9 +20,7 @@ public class MainScreen extends JFrame {
         panel1.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
         ScrollPanel scrollPanel = new ScrollPanel();
-
-        scrollPanel.addCard(new Product("Tesla Model S", "Carro elétrico", 8120.00, 12, 123L));
-        scrollPanel.addCard(new Product("Tesla Model S", "Carro elétrico", 8120.00, 12, 321L));
+        populateScrollPanel(scrollPanel);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
@@ -37,5 +38,11 @@ public class MainScreen extends JFrame {
         this.add(scrollPanel, gbc);
 
         this.setVisible(true);
+    }
+
+    private void populateScrollPanel(ScrollPanel scrollPanel) {
+        GetAllProductsUseCaseImpl getAllProductsUseCase = new GetAllProductsUseCaseImpl();
+        List<Product> products = getAllProductsUseCase.execute();
+        products.forEach(scrollPanel::addCard);
     }
 }
