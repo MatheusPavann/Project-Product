@@ -25,7 +25,8 @@ public class ScrollPanel extends JScrollPane {
         JPanel cardWrapper = new JPanel(new BorderLayout());
         cardWrapper.setBackground(Color.WHITE);
         cardWrapper.add(card, BorderLayout.CENTER);
-        cardWrapper.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 30));
+        cardWrapper.setBorder(BorderFactory.createEmptyBorder(0, 15, 0, 15));
+
 
         contentPanel.add(cardWrapper);
         contentPanel.add(Box.createVerticalStrut(10));
