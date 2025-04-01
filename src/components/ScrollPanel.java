@@ -21,10 +21,18 @@ public class ScrollPanel extends JScrollPane {
 
     public void addCard(Product product) {
         Card card = new Card(product);
-        card.setAlignmentX(Component.LEFT_ALIGNMENT);
-        contentPanel.add(card);
+
+        JPanel cardWrapper = new JPanel(new BorderLayout());
+        cardWrapper.setBackground(Color.WHITE);
+        cardWrapper.add(card, BorderLayout.CENTER);
+        cardWrapper.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 30));
+
+        contentPanel.add(cardWrapper);
         contentPanel.add(Box.createVerticalStrut(10));
+
         revalidate();
         repaint();
     }
+
+
 }
