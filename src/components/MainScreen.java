@@ -15,12 +15,16 @@ public class MainScreen extends JFrame {
         this.setTitle("Gerenciador de Produtos");
         this.setLocationRelativeTo(null);
 
-        JPanel panel1 = new JPanel();
+        FormPanel panel1 = new FormPanel();
         panel1.setBackground(Color.WHITE);
         panel1.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
+
+
+
         ScrollPanel scrollPanel = new ScrollPanel();
         populateScrollPanel(scrollPanel);
+
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.BOTH;
@@ -44,5 +48,6 @@ public class MainScreen extends JFrame {
         GetAllProductsUseCaseImpl getAllProductsUseCase = new GetAllProductsUseCaseImpl();
         List<Product> products = getAllProductsUseCase.execute();
         products.forEach(scrollPanel::addCard);
+
     }
 }

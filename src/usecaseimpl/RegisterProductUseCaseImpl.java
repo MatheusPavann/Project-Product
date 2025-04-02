@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class RegisterProductUseCaseImpl implements RegisterProductUseCase {
 
-    private static final String INSERT_PRODUCT_QUERY = "INSERT INTO product (name, description, price, stock_quantity) VALUES (?, ?, ?, ?)";
+    private static final String INSERT_PRODUCT_QUERY = "INSERT INTO product (name, description, price, stock_quantity, code) VALUES (?, ?, ?, ?, ?)";
 
     @Override
     public void execute(Product product) {
@@ -21,6 +21,7 @@ public class RegisterProductUseCaseImpl implements RegisterProductUseCase {
             statement.setString(2, product.getDescription());
             statement.setDouble(3, product.getPrice());
             statement.setInt(4, product.getStockQuantity());
+            statement.setLong(5,product.getCode());
             statement.executeUpdate();
 
         } catch (SQLException e) {

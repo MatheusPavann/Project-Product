@@ -1,12 +1,15 @@
 package components;
 
 import entities.Product;
+import usecaseimpl.GetAllProductsUseCaseImpl;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class ScrollPanel extends JScrollPane {
     private JPanel contentPanel;
+    private Timer updateTimer;
 
     public ScrollPanel() {
         contentPanel = new JPanel(new GridBagLayout());
@@ -16,12 +19,14 @@ public class ScrollPanel extends JScrollPane {
         setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         getViewport().setBackground(Color.GRAY);
+
+        iniciarAtualizacaoAutomatica();
     }
 
     public void addCard(Product product) {
         if (contentPanel.getComponentCount() > 0 &&
-                contentPanel.getComponent(contentPanel.getComponentCount()-1) instanceof Box.Filler) {
-            contentPanel.remove(contentPanel.getComponentCount()-1);
+                contentPanel.getComponent(contentPanel.getComponentCount() - 1) instanceof Box.Filler) {
+            contentPanel.remove(contentPanel.getComponentCount() - 1);
         }
 
         Card card = new Card(product);
@@ -49,5 +54,29 @@ public class ScrollPanel extends JScrollPane {
         repaint();
     }
 
-}
+    public void atualizarCardsDoBanco() {
+        SwingUtilities.invokeLater(() -> {
+            contentPanel.removeAll();
+            GetAllProductsUseCaseImpl getAllProductsUseCase = new GetAllProductsUseCaseImpl();
+            List<Product> products = getAllProductsUseCase.execute();
 
+            for (Product product : products) {
+                addCard(product);
+            }
+
+            revalidate();
+            repaint();
+        });
+    }
+
+    private void iniciarAtualizacaoAutomatica() {
+        updateTimer = new Timer(5000, e -> atualizarCardsDoBanco()); // Atualiza a cada 5 segundos
+        updateTimer.start();
+    }
+
+    public void pararAtualizacaoAutomatica() {
+        if (updateTimer != null) {
+            updateTimer.stop();
+        }
+    }
+}

@@ -1,6 +1,7 @@
 package main;
 
 import components.MainScreen;
+import entities.Product;
 
 
 public class Main {

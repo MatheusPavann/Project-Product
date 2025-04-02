@@ -36,7 +36,7 @@ public class GetAllProductsUseCaseImpl implements GetAllProductsUseCase {
                 products.add(product);
             }
         } catch (SQLException e) {
-            System.out.println("Erro ao conectar com o banco de dados");
+            System.out.println("Erro ao se conectar-se com o banco");
         }
         return products;
     }
