@@ -7,11 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Card extends JPanel {
+
     public Card(Product product) {
         setLayout(new BorderLayout(10, 10));
         setBackground(Color.WHITE);
-        setMaximumSize(new Dimension(Integer.MAX_VALUE, 120));
-        setPreferredSize(new Dimension(Integer.MAX_VALUE, 120));
         setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.BLACK, 1),
                 BorderFactory.createEmptyBorder(15, 15, 15, 15)
@@ -38,7 +37,7 @@ public class Card extends JPanel {
         infoPanel.add(Box.createVerticalStrut(5));
         infoPanel.add(codeLabel);
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 0));
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
         buttonPanel.setBackground(Color.WHITE);
 
         JButton changeButton = new JButton("Editar");
@@ -54,7 +53,6 @@ public class Card extends JPanel {
             parent.revalidate();
             parent.repaint();
         });
-
 
         buttonPanel.add(changeButton);
         buttonPanel.add(removeButton);
@@ -77,10 +75,9 @@ public class Card extends JPanel {
             DeleteProductUseCaseImpl deleteProductUseCase = new DeleteProductUseCaseImpl();
             deleteProductUseCase.execute(code);
             return true;
-        }catch (Exception e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao remover produto");
             return false;
         }
-
     }
 }
