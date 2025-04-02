@@ -9,8 +9,7 @@ public class ScrollPanel extends JScrollPane {
     private JPanel contentPanel;
 
     public ScrollPanel() {
-        contentPanel = new JPanel();
-        contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+        contentPanel = new JPanel(new GridBagLayout());
         contentPanel.setBackground(Color.WHITE);
 
         setViewportView(contentPanel);
@@ -20,19 +19,35 @@ public class ScrollPanel extends JScrollPane {
     }
 
     public void addCard(Product product) {
+        if (contentPanel.getComponentCount() > 0 &&
+                contentPanel.getComponent(contentPanel.getComponentCount()-1) instanceof Box.Filler) {
+            contentPanel.remove(contentPanel.getComponentCount()-1);
+        }
+
         Card card = new Card(product);
 
-        JPanel cardWrapper = new JPanel(new BorderLayout());
-        cardWrapper.setBackground(Color.WHITE);
-        cardWrapper.add(card, BorderLayout.CENTER);
-        cardWrapper.setBorder(BorderFactory.createEmptyBorder(0, 30, 0, 30));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = contentPanel.getComponentCount();
+        gbc.weightx = 1;
+        gbc.weighty = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.NORTHWEST;
+        gbc.insets = new Insets(5, 15, 5, 15);
 
-        contentPanel.add(cardWrapper);
-        contentPanel.add(Box.createVerticalStrut(10));
+        contentPanel.add(card, gbc);
+
+        GridBagConstraints glueGbc = new GridBagConstraints();
+        glueGbc.gridx = 0;
+        glueGbc.gridy = contentPanel.getComponentCount();
+        glueGbc.weightx = 1;
+        glueGbc.weighty = 1;
+        glueGbc.fill = GridBagConstraints.BOTH;
+        contentPanel.add(Box.createVerticalGlue(), glueGbc);
 
         revalidate();
         repaint();
     }
 
-
 }
+
