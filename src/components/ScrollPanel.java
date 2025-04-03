@@ -9,7 +9,6 @@ import java.util.List;
 
 public class ScrollPanel extends JScrollPane {
     private JPanel contentPanel;
-    private Timer updateTimer;
 
     public ScrollPanel() {
         contentPanel = new JPanel(new GridBagLayout());
@@ -20,7 +19,7 @@ public class ScrollPanel extends JScrollPane {
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         getViewport().setBackground(Color.GRAY);
 
-        iniciarAtualizacaoAutomatica();
+        initUpdate();
     }
 
     public void addCard(Product product) {
@@ -54,7 +53,7 @@ public class ScrollPanel extends JScrollPane {
         repaint();
     }
 
-    public void atualizarCardsDoBanco() {
+    public void refreshCards() {
         SwingUtilities.invokeLater(() -> {
             contentPanel.removeAll();
             GetAllProductsUseCaseImpl getAllProductsUseCase = new GetAllProductsUseCaseImpl();
@@ -69,14 +68,8 @@ public class ScrollPanel extends JScrollPane {
         });
     }
 
-    private void iniciarAtualizacaoAutomatica() {
-        updateTimer = new Timer(5000, e -> atualizarCardsDoBanco()); // Atualiza a cada 5 segundos
+    private void initUpdate() {
+        Timer updateTimer = new Timer(3000, e -> refreshCards());
         updateTimer.start();
-    }
-
-    public void pararAtualizacaoAutomatica() {
-        if (updateTimer != null) {
-            updateTimer.stop();
-        }
     }
 }

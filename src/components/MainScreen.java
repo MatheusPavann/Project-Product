@@ -19,9 +19,6 @@ public class MainScreen extends JFrame {
         panel1.setBackground(Color.WHITE);
         panel1.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
-
-
-
         ScrollPanel scrollPanel = new ScrollPanel();
         populateScrollPanel(scrollPanel);
 

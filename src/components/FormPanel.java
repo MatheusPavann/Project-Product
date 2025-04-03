@@ -1,7 +1,9 @@
 package components;
 
 import entities.Product;
+import usecaseimpl.ProductExistsByCodeUseCaseImpl;
 import usecaseimpl.RegisterProductUseCaseImpl;
+import utils.ProductValidator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,14 +13,14 @@ public class FormPanel extends JPanel {
     public FormPanel() {
 
         add(Box.createVerticalStrut(30));
-        JLabel jLabel = new JLabel("Cadastro De Produtos");
-        jLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        jLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
-        add(jLabel);
+        JLabel titleLabel = new JLabel("Cadastro De Produtos");
+        titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
+        add(titleLabel);
 
 
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Define layout vertical
-        setPreferredSize(new Dimension(300, 150)); // Define um tamanho fixo para o painel
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setPreferredSize(new Dimension(300, 150));
 
         TextField name = new TextField("Nome: ");
         TextField description = new TextField("Descricao: ");
@@ -26,49 +28,33 @@ public class FormPanel extends JPanel {
         TextField quantity = new TextField("Quantidade: ");
         TextField code = new TextField("Codigo: ");
 
+        JButton addButton = new JButton("Adicionar");
+        addButton.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        addButton.setFont(new Font("SansSerif", Font.BOLD, 16));
 
+        addButton.addActionListener(event -> {
+            Product product = ProductValidator.validateAndCreateProduct(
+                    name.getText(),
+                    description.getText(),
+                    price.getText(),
+                    quantity.getText(),
+                    code.getText(),
+                    this);
 
-
-
-
-        JButton jButton = new JButton("Adicionar");
-        jButton.addActionListener(event -> {
-            String productName = name.getText();
-            String productDescription = description.getText();
-
-            Double productPrice = 0.0;
-            try{
-                productPrice = Double.parseDouble(price.getText());
-            }catch (NumberFormatException e){
-                JOptionPane.showMessageDialog(this,"Valor Invalido");
+            if (product != null) {
+                onAddButtonClick(product);
             }
-            Integer productQuantity = 0;
-            try{
-                productQuantity = Integer.parseInt(quantity.getText());
-            }catch (NumberFormatException e){
-                JOptionPane.showMessageDialog(this,"Valor Invalido");
-            }
-            Long productCode = 0L;
-            try{
-                productCode = Long.parseLong(code.getText());
-            }catch (NumberFormatException e){
-                JOptionPane.showMessageDialog(this,"Valor Invalido");
-            }
-
-            Product product = new Product(productName,productDescription,productPrice,productQuantity,productCode);
-            onAddButtonClick(product);
         });
-        add(jButton);
 
-        name.setMaximumSize(new Dimension(550, 50)); // Define tamanho fixo para o campo de texto
+        name.setMaximumSize(new Dimension(550, 50));
         description.setMaximumSize(new Dimension(550, 50));
-        price.setMaximumSize(new Dimension(550, 50)); // Define tamanho fixo para o campo de texto
+        price.setMaximumSize(new Dimension(550, 50));
         quantity.setMaximumSize(new Dimension(550, 50));
         code.setMaximumSize(new Dimension(550, 50));
 
         add(Box.createVerticalStrut(80));
         add(name);
-        add(Box.createVerticalStrut(10)); // Espaço menor entre os campos
+        add(Box.createVerticalStrut(10));
         add(description);
         add(Box.createVerticalStrut(10));
         add(price);
@@ -76,6 +62,8 @@ public class FormPanel extends JPanel {
         add(quantity);
         add(Box.createVerticalStrut(10));
         add(code);
+        add(Box.createVerticalStrut(10));
+        add(addButton);
     }
 
 
