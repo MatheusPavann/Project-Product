@@ -2,6 +2,8 @@ package components;
 
 import entities.Product;
 import usecaseimpl.DeleteProductUseCaseImpl;
+import usecaseimpl.UpdateProductUseCaseImpl;
+import utils.ColorScheme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +12,7 @@ public class Card extends JPanel {
 
     public Card(Product product) {
         setLayout(new BorderLayout(10, 10));
-        setBackground(Color.WHITE);
+        setBackground(ColorScheme.CARD_COLOR);
         setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createLineBorder(Color.BLACK, 1),
                 BorderFactory.createEmptyBorder(15, 15, 15, 15)
@@ -18,7 +20,7 @@ public class Card extends JPanel {
 
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-        infoPanel.setBackground(Color.WHITE);
+        infoPanel.setBackground(ColorScheme.CARD_COLOR);
         infoPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         Label nameLabel = new Label(product.getName());
@@ -38,13 +40,13 @@ public class Card extends JPanel {
         infoPanel.add(codeLabel);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 0, 0));
-        buttonPanel.setBackground(Color.WHITE);
+        buttonPanel.setBackground(ColorScheme.CARD_COLOR);
 
         JButton changeButton = new JButton("Editar");
         JButton removeButton = new JButton("Remover");
 
-        styleButton(changeButton, Color.BLUE);
-        styleButton(removeButton, Color.RED);
+        styleButton(changeButton, ColorScheme.EDIT_BUTTON_COLOR);
+        styleButton(removeButton, ColorScheme.REMOVE_BUTTON_COLOR);
 
         removeButton.addActionListener(event -> {
             boolean result = onDeleteButtonClick(product.getCode());
@@ -53,6 +55,20 @@ public class Card extends JPanel {
             parent.revalidate();
             parent.repaint();
         });
+
+        changeButton.addActionListener(event -> {
+            JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
+
+            EditCardDialog editCardDialog = new EditCardDialog(
+                    parent,
+                    product
+            );
+
+            editCardDialog.setVisible(true);
+        });
+
+
+
 
         buttonPanel.add(changeButton);
         buttonPanel.add(removeButton);

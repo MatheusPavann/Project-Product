@@ -8,5 +8,8 @@ public class ColorScheme {
     }
 
     public static final Color TEXT_COLOR = new Color(0, 0, 0);  // Azul
-    public static final Color SECONDARY = new Color(233, 233, 233); // Laranja
+    public static final Color CARD_COLOR = new Color(206, 209, 218);
+    public static final Color ADD_BUTTON_COLOR = new Color(50,205,50);
+    public static final Color REMOVE_BUTTON_COLOR = new Color(255,99,71);
+    public static final Color EDIT_BUTTON_COLOR = new Color(65,105,225);
 }
