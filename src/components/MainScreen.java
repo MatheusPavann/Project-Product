@@ -11,7 +11,7 @@ public class MainScreen extends JFrame {
 
     public MainScreen() {
         this.setLayout(new GridBagLayout());
-        this.setSize(1920, 1080);
+        this.setSize(1820, 980);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Gerenciador de Produtos");
         this.setLocationRelativeTo(null);
