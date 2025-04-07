@@ -2,6 +2,7 @@ package usecaseimpl;
 
 import entities.Product;
 import persistence.DatabaseConnection;
+import sockets.ProductMessage;
 import usecases.RegisterProductUseCase;
 
 import java.sql.Connection;
@@ -23,6 +24,9 @@ public class RegisterProductUseCaseImpl implements RegisterProductUseCase {
             statement.setInt(4, product.getStockQuantity());
             statement.setLong(5,product.getCode());
             statement.executeUpdate();
+
+            ProductMessage msg = new ProductMessage(ProductMessage.ActionType.CREATE,product.getCode(), product.getName());
+
 
         } catch (SQLException e) {
             System.out.println("Erro ao conectar com o banco de dados");
