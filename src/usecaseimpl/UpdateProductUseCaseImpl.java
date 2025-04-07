@@ -11,10 +11,10 @@ import java.sql.SQLException;
 public class UpdateProductUseCaseImpl implements UpdateProductUseCase {
 
     private final String UPDATE_PRODUCT_QUERT = """
-                UPDATE product p
-                SET p.code = ?, p.name = ?, p.price = ?, p.stockQuantity = ?, p.description = ?
-                WHERE p.code = ?
-                AND (p.code = ? OR NOT EXISTS (
+                UPDATE product
+                SET code = ?, name = ?, price = ?, stock_quantity = ?, description = ?
+                WHERE code = ?
+                AND (code = ? OR NOT EXISTS (
                     SELECT 1 FROM product WHERE code = ?
                 ));
             """;
@@ -32,10 +32,11 @@ public class UpdateProductUseCaseImpl implements UpdateProductUseCase {
             statement.setString(5, product.getDescription());
             statement.setLong(6, product.getCode());
             statement.setLong(7, product.getCode());
+            statement.setLong(8, product.getCode());
 
             int rowsAffected = statement.executeUpdate();
 
-            if(rowsAffected != 1) {
+            if (rowsAffected != 1) {
                 System.out.println("Falha ao atualizar os dados do produto");
             }
             System.out.println("Produto atualizado com sucesso!");

@@ -9,7 +9,6 @@ public class Product {
     private Long code;
 
     public Product(){
-
     }
 
     public Product(Long id, String name, String description, Double price, Integer stockQuantity, Long code) {
@@ -27,6 +26,13 @@ public class Product {
         this.price = price;
         this.stockQuantity = stockQuantity;
         this.code = code;
+    }
+
+    public Product(String name, String description, Double price, Integer stockQuantity) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
     }
 
     public Long getId() {

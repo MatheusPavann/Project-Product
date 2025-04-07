@@ -69,7 +69,7 @@ public class ScrollPanel extends JScrollPane {
     }
 
     private void initUpdate() {
-        Timer updateTimer = new Timer(3000, e -> refreshCards());
+        Timer updateTimer = new Timer(300, e -> refreshCards());
         updateTimer.start();
     }
 }

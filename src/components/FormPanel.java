@@ -3,6 +3,7 @@ package components;
 import entities.Product;
 import usecaseimpl.ProductExistsByCodeUseCaseImpl;
 import usecaseimpl.RegisterProductUseCaseImpl;
+import utils.ColorScheme;
 import utils.ProductValidator;
 
 import javax.swing.*;
@@ -31,6 +32,12 @@ public class FormPanel extends JPanel {
         JButton addButton = new JButton("Adicionar");
         addButton.setAlignmentY(Component.BOTTOM_ALIGNMENT);
         addButton.setFont(new Font("SansSerif", Font.BOLD, 16));
+        addButton.setBackground(ColorScheme.ADD_BUTTON_COLOR);
+
+        JButton searchButton = new JButton("  Buscar  ");
+        searchButton.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        searchButton.setFont(new Font("SansSerif", Font.BOLD, 16));
+        searchButton.setBackground(ColorScheme.EDIT_BUTTON_COLOR);
 
         addButton.addActionListener(event -> {
             Product product = ProductValidator.validateAndCreateProduct(
@@ -39,11 +46,18 @@ public class FormPanel extends JPanel {
                     price.getText(),
                     quantity.getText(),
                     code.getText(),
-                    this);
+                    this,
+                    null
+            );
 
             if (product != null) {
                 onAddButtonClick(product);
             }
+        });
+
+        searchButton.addActionListener(event -> {
+            SearchCardDialog cardDialog = new SearchCardDialog(this);
+            cardDialog.setVisible(true);
         });
 
         name.setMaximumSize(new Dimension(550, 50));
@@ -64,6 +78,8 @@ public class FormPanel extends JPanel {
         add(code);
         add(Box.createVerticalStrut(10));
         add(addButton);
+        add(Box.createVerticalStrut(10));
+        add(searchButton);
     }
 
 

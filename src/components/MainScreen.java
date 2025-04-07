@@ -8,6 +8,7 @@ import java.awt.*;
 import java.util.List;
 
 public class MainScreen extends JFrame {
+
     public MainScreen() {
         this.setLayout(new GridBagLayout());
         this.setSize(1920, 1080);
