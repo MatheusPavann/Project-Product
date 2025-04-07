@@ -16,9 +16,13 @@ Seu objetivo é criar uma aplicação desktop que permite o **gerenciamento de p
 ## ✅ Funcionalidades
 
 - **Cadastrar Produto**: Preencha o formulário com nome, descrição, preço, quantidade e código único.
+![Visão geral da aplicação](./assets/register_form.png)
 - **Buscar Produto**: Informe o código do produto e edite os dados existentes, ou delete o produto.
+![Visão geral da aplicação](./assets/search_product.png)
 - **Atualizar Produto**: Altere os dados de um produto existente.
+![Visão geral da aplicação](./assets/edit_product.png)
 - **Listar Produtos**: Exibe todos os produtos cadastrados em forma de cards.
+![Visão geral da aplicação](./assets/list_products.png)
 - **Deletar Produto**: Remove um produto selecionado permanentemente.
 
 ---
