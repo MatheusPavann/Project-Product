@@ -88,6 +88,7 @@ public class FormPanel extends JPanel {
         try {
             RegisterProductUseCaseImpl registerProductUseCase = new RegisterProductUseCaseImpl();
             registerProductUseCase.execute(product);
+            ScrollPanel.refresh();
             JOptionPane.showMessageDialog(this, "Produto Adicionado com sucesso!");
             return true;
         } catch (Exception e) {

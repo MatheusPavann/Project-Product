@@ -1,6 +1,5 @@
 package sockets;
 
-import sockets.ProductMessage;
 
 import java.io.*;
 import java.net.*;

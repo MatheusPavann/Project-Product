@@ -60,6 +60,7 @@ public class EditCardDialog extends JDialog {
             if(validateProduct != null) {
                 UpdateProductUseCaseImpl updateProductUseCase = new UpdateProductUseCaseImpl();
                 updateProductUseCase.execute(validateProduct);
+                ScrollPanel.refresh();
                 dispose();
             }
         });
@@ -67,6 +68,7 @@ public class EditCardDialog extends JDialog {
         deleteButton.addActionListener(event-> {
             DeleteProductUseCaseImpl deleteProductUseCase = new DeleteProductUseCaseImpl();
             deleteProductUseCase.execute(product.getCode());
+            ScrollPanel.refresh();
             dispose();
         });
 

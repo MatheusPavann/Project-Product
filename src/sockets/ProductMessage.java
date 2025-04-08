@@ -6,12 +6,10 @@ public class ProductMessage implements Serializable {
     public enum ActionType { CREATE, UPDATE, DELETE }
 
     private ActionType action;
-    private String code;
+    private Long code;
     private String name;
 
-    public ProductMessage(ActionType create, Long code, String name) {}
-
-    public ProductMessage(ActionType action, String code, String name) {
+    public ProductMessage(ActionType action, Long code, String name) {
         this.action = action;
         this.code = code;
         this.name = name;
@@ -25,11 +23,11 @@ public class ProductMessage implements Serializable {
         this.action = action;
     }
 
-    public String getCode() {
+    public Long getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(Long code) {
         this.code = code;
     }
 
