@@ -22,6 +22,7 @@ public class MainScreen extends JFrame {
 
         ScrollPanel scrollPanel = new ScrollPanel();
         populateScrollPanel(scrollPanel);
+        ScrollPanel.refresh();
 
 
         GridBagConstraints gbc = new GridBagConstraints();
