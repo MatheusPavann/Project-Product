@@ -2,7 +2,7 @@ package usecaseimpl;
 
 import entities.Product;
 import persistence.DatabaseConnection;
-import sockets.ProductMessage;
+import sockets.PeerClient;
 import usecases.RegisterProductUseCase;
 
 import java.sql.Connection;
@@ -25,8 +25,7 @@ public class RegisterProductUseCaseImpl implements RegisterProductUseCase {
             statement.setLong(5,product.getCode());
             statement.executeUpdate();
 
-            ProductMessage msg = new ProductMessage(ProductMessage.ActionType.CREATE,product.getCode(), product.getName());
-
+            PeerClient.send("localhost", 5001);
 
         } catch (SQLException e) {
             System.out.println("Erro ao conectar com o banco de dados");

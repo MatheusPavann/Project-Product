@@ -8,9 +8,13 @@ import java.awt.*;
 import java.util.List;
 
 public class ScrollPanel extends JScrollPane {
+    private static ScrollPanel instance;
+
     private JPanel contentPanel;
 
     public ScrollPanel() {
+        instance = this;
+
         contentPanel = new JPanel(new GridBagLayout());
         contentPanel.setBackground(Color.WHITE);
 
@@ -19,7 +23,13 @@ public class ScrollPanel extends JScrollPane {
         setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         getViewport().setBackground(Color.GRAY);
 
-        initUpdate();
+        refreshCards();
+    }
+
+    public static void refresh() {
+        if (instance != null) {
+            instance.refreshCards();
+        }
     }
 
     public void addCard(Product product) {
@@ -66,10 +76,5 @@ public class ScrollPanel extends JScrollPane {
             revalidate();
             repaint();
         });
-    }
-
-    private void initUpdate() {
-        Timer updateTimer = new Timer(300, e -> refreshCards());
-        updateTimer.start();
     }
 }

@@ -10,6 +10,7 @@ import java.awt.*;
 
 public class Card extends JPanel {
 
+
     public Card(Product product) {
         setLayout(new BorderLayout(10, 10));
         setBackground(ColorScheme.CARD_COLOR);
@@ -51,19 +52,17 @@ public class Card extends JPanel {
         removeButton.addActionListener(event -> {
             boolean result = onDeleteButtonClick(product.getCode());
             Container parent = getParent();
-            parent.remove(this);
+            parent.remove(parent);
             parent.revalidate();
             parent.repaint();
         });
 
         changeButton.addActionListener(event -> {
             JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
-
             EditCardDialog editCardDialog = new EditCardDialog(
                     parent,
                     product
             );
-
             editCardDialog.setVisible(true);
         });
 
@@ -90,6 +89,7 @@ public class Card extends JPanel {
         try {
             DeleteProductUseCaseImpl deleteProductUseCase = new DeleteProductUseCaseImpl();
             deleteProductUseCase.execute(code);
+            ScrollPanel.refresh();
             return true;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Erro ao remover produto");

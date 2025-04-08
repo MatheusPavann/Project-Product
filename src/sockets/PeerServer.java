@@ -1,6 +1,7 @@
 package sockets;
 
-import sockets.ProductMessage;
+
+import components.ScrollPanel;
 
 import java.io.*;
 import java.net.*;
@@ -26,8 +27,10 @@ public class PeerServer extends Thread {
 
     private void handleConnection(Socket socket) {
         try (ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
-            ProductMessage message = (ProductMessage) in.readObject();
-            System.out.println("Recebido: " + message.getAction() + " - " + message.getName());
+            String message = (String) in.readObject();
+            if(message.equals("refresh")) {
+                ScrollPanel.refresh();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
