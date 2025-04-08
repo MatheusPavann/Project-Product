@@ -2,6 +2,7 @@ package usecaseimpl;
 
 
 import persistence.DatabaseConnection;
+import sockets.PeerClient;
 import usecases.DeleteProductUseCase;
 
 import java.sql.Connection;
@@ -20,6 +21,7 @@ public class DeleteProductUseCaseImpl implements DeleteProductUseCase {
                 int rowsAffected = statement.executeUpdate();
 
                 if(rowsAffected != 1){
+                    PeerClient.send("localhost", 5001);
                     return true;
                 }
                 return false;
