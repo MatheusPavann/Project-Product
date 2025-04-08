@@ -39,6 +39,17 @@ public class FormPanel extends JPanel {
         searchButton.setFont(new Font("SansSerif", Font.BOLD, 16));
         searchButton.setBackground(ColorScheme.EDIT_BUTTON_COLOR);
 
+        JButton refreshButton = new JButton("Atualizar ");
+        refreshButton.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        refreshButton.setFont(new Font("SansSerif", Font.BOLD, 16));
+        refreshButton.setBackground(ColorScheme.REFRESH_BUTTON_COLOR);
+
+        JButton exitButton = new JButton("     Sair     ");
+        exitButton.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        exitButton.setFont(new Font("SansSerif", Font.BOLD, 16));
+        exitButton.setBackground(ColorScheme.REMOVE_BUTTON_COLOR);
+
+
         addButton.addActionListener(event -> {
             Product product = ProductValidator.validateAndCreateProduct(
                     name.getText(),
@@ -60,6 +71,12 @@ public class FormPanel extends JPanel {
             cardDialog.setVisible(true);
         });
 
+        refreshButton.addActionListener(event -> {
+            ScrollPanel.refresh();
+        });
+
+        exitButton.addActionListener(event -> System.exit(0));
+
         name.setMaximumSize(new Dimension(550, 50));
         description.setMaximumSize(new Dimension(550, 50));
         price.setMaximumSize(new Dimension(550, 50));
@@ -80,6 +97,10 @@ public class FormPanel extends JPanel {
         add(addButton);
         add(Box.createVerticalStrut(10));
         add(searchButton);
+        add(Box.createVerticalStrut(10));
+        add(refreshButton);
+        add(Box.createVerticalStrut(10));
+        add(exitButton);
     }
 
 
