@@ -3,6 +3,8 @@ package usecaseimpl;
 
 import persistence.DatabaseConnection;
 import sockets.PeerClient;
+import sockets.PeerMessageSender;
+import sockets.ServerInfo;
 import usecases.DeleteProductUseCase;
 
 import java.sql.Connection;
@@ -19,12 +21,8 @@ public class DeleteProductUseCaseImpl implements DeleteProductUseCase {
                 PreparedStatement statement = connection.prepareStatement(DELETE_PRODUCT_QUERY);
                 statement.setLong(1, code);
                 int rowsAffected = statement.executeUpdate();
-
-                if(rowsAffected != 1){
-                    PeerClient.send("localhost", 5001);
-                    return true;
-                }
-                return false;
+                PeerMessageSender.sendRefresh(ServerInfo.getIp(), ServerInfo.getPort());
+                return true;
 
             } catch (SQLException e) {
                 System.out.println("Erro ao conectar com o banco de dados");
