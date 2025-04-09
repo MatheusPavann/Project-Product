@@ -3,6 +3,8 @@ package usecaseimpl;
 import entities.Product;
 import persistence.DatabaseConnection;
 import sockets.PeerClient;
+import sockets.PeerMessageSender;
+import sockets.ServerInfo;
 import usecases.UpdateProductUseCase;
 
 import java.sql.Connection;
@@ -36,8 +38,7 @@ public class UpdateProductUseCaseImpl implements UpdateProductUseCase {
             statement.setLong(8, product.getCode());
 
             int rowsAffected = statement.executeUpdate();
-            PeerClient.send("localhost", 5001);
-
+            PeerMessageSender.sendRefresh(ServerInfo.getIp(), ServerInfo.getPort());
             if (rowsAffected != 1) {
                 System.out.println("Falha ao atualizar os dados do produto");
             }
