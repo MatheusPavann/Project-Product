@@ -24,11 +24,11 @@ public class Card extends JPanel {
         infoPanel.setBackground(ColorScheme.CARD_COLOR);
         infoPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        Label nameLabel = new Label(product.getName());
-        Label descriptionLabel = new Label(product.getDescription());
-        Label stockLabel = new Label(product.getStockQuantity().toString());
-        Label codeLabel = new Label(product.getCode().toString());
-        Label priceLabel = new Label(product.getPrice().toString());
+        Label nameLabel = new Label("Nome: "+product.getName());
+        Label descriptionLabel = new Label( "Descrição: " + product.getDescription());
+        Label stockLabel = new Label("Quantidade: "+ product.getStockQuantity().toString());
+        Label codeLabel = new Label("Codigo: "+ product.getCode().toString());
+        Label priceLabel = new Label("Preço: "+product.getPrice().toString());
 
         infoPanel.add(nameLabel);
         infoPanel.add(Box.createVerticalStrut(5));
